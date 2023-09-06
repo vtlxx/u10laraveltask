@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('full_name', 128);
             $table->string('phone_number', 14);
             $table->string('address', 256);
-            $table->timestamps();
+            $table->string('email', 256);
         });
 
         Schema::create('deliveries', function (Blueprint $table) {
@@ -27,7 +27,6 @@ return new class extends Migration
             $table->smallInteger('height', false, true);
             $table->smallInteger('length', false, true);
             $table->smallInteger('weight', false, true);
-            $table->timestamps();
             $table->foreign('customer_id')
                 ->references('id')
                 ->on('customers')

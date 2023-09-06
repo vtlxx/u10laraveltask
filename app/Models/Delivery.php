@@ -38,14 +38,16 @@ class Delivery extends Model
             return DB::table('customers')->insertGetId([
                 'full_name'    => $data['customer_full_name'],
                 'phone_number' => $data['customer_phone_number'],
-                'address'      => $data['customer_address']
+                'address'      => $data['customer_address'],
+                'email'        => $data['customer_email']
             ]);
         }
 
         // updating if exists
         DB::table('customers')->where('phone_number', $data['customer_phone_number'])->update([
             'full_name' => $data['customer_full_name'],
-            'address'   => $data['customer_address']
+            'address'   => $data['customer_address'],
+            'email'     => $data['customer_email']
         ]);
         return $id[0]->id;
     }
@@ -55,7 +57,7 @@ class Delivery extends Model
      */
     public static function get(int $id): array
     {
-        return DB::table('deliveries')->select(['ttn', 'height', 'width', 'length', 'weight', 'full_name', 'phone_number', 'address'])
+        return DB::table('deliveries')->select(['ttn', 'height', 'width', 'length', 'weight', 'full_name', 'phone_number', 'email', 'address'])
             ->join('customers', 'customers.id', '=', 'deliveries.customer_id')
             ->where('deliveries.id', $id)->get()->toArray();
     }
@@ -69,7 +71,7 @@ class Delivery extends Model
             return false;
         }
 
-        return DB::table('deliveries')->select(['ttn', 'height', 'width', 'length', 'weight', 'full_name', 'phone_number', 'address'])
+        return DB::table('deliveries')->select(['ttn', 'height', 'width', 'length', 'weight', 'full_name', 'phone_number', 'email', 'address'])
             ->join('customers', 'customers.id', '=', 'deliveries.customer_id')
             ->where('deliveries.customer_id', $customer_id[0]->id)->get()->toArray();
     }

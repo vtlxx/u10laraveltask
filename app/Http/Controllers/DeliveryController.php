@@ -25,7 +25,7 @@ class DeliveryController extends Controller
             'package_length' => ['required', 'numeric', 'min:0'],
             'package_weight' => ['required', 'numeric', 'min:0'],
             'customer_full_name' => ['required', 'string', 'min:3', 'max:128'],
-            'customer_phone_number' => ['required', 'string'],
+            'customer_phone_number' => ['required', 'string', 'min:10', 'max:13'],
             'customer_email' => ['required', 'email'],
             'customer_address' => ['required', 'string', 'min:3', 'max:256']
         ]);
